@@ -1,114 +1,193 @@
-import Image from "next/image";
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// pages/index.js
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [fadeIn, setFadeIn] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  useEffect(() => {
+    setTimeout(() => setFadeIn(true), 500);
+  }, []);
+
+  return (
+    <div className="bg-pink-50 text-gray-800 min-h-screen flex flex-col items-center justify-center p-6">
+      {/* Header Section */}
+      <header className="text-center mb-12">
+        <h1 className="text-5xl font-bold mb-4 text-red-600 animate-pulse">
+          Harleen Makeup Skin Hair Academy
+        </h1>
+        <p className="text-lg font-light text-gray-500">
+          Unlock your beauty potential with expert training.
+        </p>
+      </header>
+
+      {/* Product & Services Section */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className={`transition-opacity duration-1000 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="relative">
+            <img
+              src="https://via.placeholder.com/400x303"
+              alt="Skincare"
+              className="rounded-lg shadow-lg w-full h-auto"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/path-to-local-fallback-image.jpg'; // Fallback in case image fails to load
+              }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+          <h3 className="text-2xl font-semibold mt-4 text-center text-red-600">Skincare Training</h3>
+          <p className="text-center text-gray-500 mt-2">
+            Learn everything from basic to advanced skincare techniques with professional trainers.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+
+        <div className={`transition-opacity duration-1000 delay-200 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="relative">
+            <img
+              src="https://via.placeholder.com/400x303"
+              alt="Makeup"
+              className="rounded-lg shadow-lg w-full h-auto"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/path-to-local-fallback-image.jpg';
+              }}
+            />
+          </div>
+          <h3 className="text-2xl font-semibold mt-4 text-center text-red-600">Makeup Masterclass</h3>
+          <p className="text-center text-gray-500 mt-2">
+            Get hands-on experience with the latest trends in makeup artistry.
+          </p>
+        </div>
+
+        <div className={`transition-opacity duration-1000 delay-400 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="relative">
+            <img
+              src="https://via.placeholder.com/400x303"
+              alt="Hair Styling"
+              className="rounded-lg shadow-lg w-full h-auto"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/path-to-local-fallback-image.jpg';
+              }}
+            />
+          </div>
+          <h3 className="text-2xl font-semibold mt-4 text-center text-red-600">Hair Styling Techniques</h3>
+          <p className="text-center text-gray-500 mt-2">
+            Master modern hair styling techniques and trends for all hair types.
+          </p>
+        </div>
+      </section>
+
+      {/* Additional Services Section */}
+      <section className="bg-white p-8 rounded-lg shadow-lg mb-12 border-4 border-yellow-500">
+        <h2 className="text-3xl font-bold mb-6 text-center text-pink-500">Our Specialized Services</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div className="relative">
+              <img
+                src="https://via.placeholder.com/400x303"
+                alt="Bridal Makeup"
+                className="rounded-lg shadow-lg w-full h-auto"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/path-to-local-fallback-image.jpg';
+                }}
+              />
+            </div>
+            <h3 className="text-2xl font-semibold mt-4 text-center text-red-600">Bridal Makeup</h3>
+            <p className="text-center text-gray-500 mt-2">
+              Get trained on creating stunning Indian bridal looks with traditional and modern techniques.
+            </p>
+          </div>
+
+          <div>
+            <div className="relative">
+              <img
+                src="https://via.placeholder.com/400x303"
+                alt="Special Effects Makeup"
+                className="rounded-lg shadow-lg w-full h-auto"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/path-to-local-fallback-image.jpg';
+                }}
+              />
+            </div>
+            <h3 className="text-2xl font-semibold mt-4 text-center text-red-600">Special Effects Makeup</h3>
+            <p className="text-center text-gray-500 mt-2">
+              Learn the art of special effects makeup for film, TV, and fashion shows.
+            </p>
+          </div>
+
+          <div>
+            <div className="relative">
+              <img
+                src="https://via.placeholder.com/400x303"
+                alt="Advanced Skincare"
+                className="rounded-lg shadow-lg w-full h-auto"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/path-to-local-fallback-image.jpg';
+                }}
+              />
+            </div>
+            <h3 className="text-2xl font-semibold mt-4 text-center text-red-600">Advanced Skincare</h3>
+            <p className="text-center text-gray-500 mt-2">
+              From anti-aging treatments to therapeutic facials, become a pro in skincare.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="bg-pink-100 p-8 rounded-lg shadow-lg mb-12">
+        <h2 className="text-3xl font-bold mb-6 text-center text-pink-600">What Our Students Say</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="p-6 bg-white rounded-lg border-4 border-pink-500">
+            <p className="text-gray-500 mb-4">
+              "Harleen Academy gave me the confidence and skills to start my own beauty business. The bridal makeup training was amazing!" 
+            </p>
+            <p className="text-red-600 font-bold">- Riya S.</p>
+          </div>
+          <div className="p-6 bg-white rounded-lg border-4 border-pink-500">
+            <p className="text-gray-500 mb-4">
+              "The makeup masterclass was life-changing! I now feel ready to take on any client for Indian bridal makeup."
+            </p>
+            <p className="text-red-600 font-bold">- Priya K.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mb-12 text-center border-4 border-yellow-500">
+        <h2 className="text-3xl font-bold mb-6 text-pink-500">Why Choose Harleen Academy?</h2>
+        <p className="text-gray-500 mb-6">
+          At Harleen Academy, we provide the latest tools, techniques, and professional insights to help you excel in the beauty industry. Whether you're a beginner or looking to sharpen your skills, our programs are designed to help you succeed.
+        </p>
+        <ul className="text-left list-disc list-inside space-y-3 text-gray-500">
+          <li>Professional instructors with real-world experience.</li>
+          <li>Hands-on training with the latest industry tools.</li>
+          <li>Personalized learning paths based on your goals.</li>
+          <li>State-of-the-art facilities and equipment.</li>
+          <li>Job placement assistance and business mentorship.</li>
+        </ul>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:contact@harleenacademy.com"
+          className="inline-block bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg mt-6 transition-colors duration-300"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          Contact Us for Enrollment
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Location Section */}
+      <section className="bg-pink-100 p-8 rounded-lg shadow-lg mb-12 text-center border-4 border-yellow-500">
+        <h2 className="text-3xl font-bold mb-6 text-pink-500">Our Location</h2>
+        <p className="text-gray-500 mb-4">1234 Beauty Lane, Glamour City, India</p>
+        <p className="text-gray-500">We are conveniently located in the heart of the city with easy access to public transportation and parking.</p>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="mt-12 text-gray-500">
+        <p>&copy; 2024 Harleen Skin Makeup & Hair Academy. All Rights Reserved.</p>
+        <p>Privacy Policy | Terms of Service</p>
       </footer>
     </div>
   );
